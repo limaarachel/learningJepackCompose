@@ -1,16 +1,73 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+Company Logo
+Como Consertar .gitignore para Arquivos .idea no Android Studio
+Vejo que você está tendo problemas com arquivos na pasta .idea sendo rastreados pelo Git, apesar de ter um .gitignore. Vamos resolver isso:
+
+Problema Identificado
+Seu .gitignore atual tem a entrada ./.idea, mas isso não está ignorando adequadamente todos os arquivos dentro da pasta .idea. Vamos corrigi-lo e limpar o cache do Git.
+
+Solução
+1. Primeiro, corrija o arquivo .gitignore:
+Substitua a linha ./.idea por:
+
+# Ignorar toda a pasta .idea e seu conteúdo
+.idea/
+
+# Alternative: se quiser ser mais específico e incluir alguns arquivos .idea
+#.idea/*
+#!.idea/codeStyles/
+#!.idea/inspectionProfiles/
+A primeira opção ignora completamente a pasta .idea, o que é recomendado para a maioria dos projetos Android. A segunda opção (comentada) seria se você quisesse manter certas subpastas específicas.
+
+2. Remova os arquivos do cache do Git:
+Depois de atualizar seu .gitignore, execute os seguintes comandos para remover os arquivos já rastreados:
+
+bash
+Copy code
+# Remover todos os arquivos .idea do tracking do Git
+git rm -r --cached .idea
+
+# Adicionar as alterações do .gitignore
+git add .gitignore
+
+# Commit das alterações
+git commit -m "Atualiza .gitignore para excluir corretamente arquivos .idea"
+3. Arquivo .gitignore completo recomendado para projetos Android:
+# Arquivos gerados pelo Gradle
+.gradle/
+build/
+
+# Arquivos locais
 local.properties
-./.idea
+
+# Android Studio e IntelliJ
+.idea/
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+.idea/modules.xml
+.idea/navEditor.xml
+
+# Mac OS
+.DS_Store
+
+# Arquivos de compilação do NDK
+.externalNativeBuild
+.cxx/
+
+# Arquivos de captura do Google Services
+captures/
+
+# Keystore (segredo)
+*.jks
+*.keystore
+
+# Google Services (ex. APIs ou Firebase)
+google-services.json
+
+# Outros
+*.log
